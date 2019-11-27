@@ -1,3 +1,4 @@
+paths: {}
 openapi: 3.0.0
 info:
   version: 1.0.0
@@ -36,7 +37,7 @@ info:
 
     # OpenAPI Specification
 
-    The goal of The OpenAPI Specification is to define a standard,
+    The goals of The OpenAPI Specification is to define a standard,
     language-agnostic interface to REST APIs which
 
     allows both humans and computers to discover and understand the capabilities
