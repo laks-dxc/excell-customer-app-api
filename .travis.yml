@@ -1,9 +1,6 @@
 language: node_js
 node_js:
   - "node"
-env:
-  global:
-    - GH-TOKEN=0f146f5af527341e09d169525cce707428ad724b
 deploy:
   - skip_cleanup: true
     provider: script
