@@ -1,0 +1,8 @@
+
+apiTitle: Excell Customer App
+splitSpec: true
+codeSamples: true
+swaggerUI: true
+travis: true
+repo: excell/api/app/customer
+oasVersion: 3.0.0
