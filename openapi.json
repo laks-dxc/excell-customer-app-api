@@ -125,6 +125,50 @@
         ]
       }
     },
+    "/my/path": {
+      "post": {
+        "summary": "summary of my post",
+        "operationId": "post-my-path",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Description for my path",
+        "security": [
+          {
+            "basic_auth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "mybodysring": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
     "/users/{username}": {
       "parameters": [
         {
@@ -256,7 +300,10 @@
         "description": "User email address",
         "type": "string",
         "format": "test",
-        "example": "john.smith@example.com"
+        "example": "john.smith@example.com",
+        "x-examples": {
+          "example-1": {}
+        }
       },
       "User": {
         "type": "object",
@@ -295,6 +342,9 @@
       }
     },
     "securitySchemes": {
+      "API Key - 1": {
+        "type": "openIdConnect"
+      },
       "api_key": {
         "type": "apiKey",
         "in": "header",
