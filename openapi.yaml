@@ -14,7 +14,7 @@ servers:
 paths:
   /generateToken:
     post:
-      summary: ''
+      summary: 'Get auth token of the customer '
       operationId: generateToken
       responses:
         '200':
@@ -64,13 +64,131 @@ paths:
               type: object
               properties: {}
     parameters: []
+  /getCustomerDetails:
+    post:
+      summary: Get basic contact details of the customer
+      operationId: post-getCustomerDetails
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  result:
+                    type: object
+                    properties:
+                      customerId:
+                        type: integer
+                      cutomerName:
+                        type: string
+                      daytime:
+                        type: string
+                      night:
+                        type: string
+                      mobile:
+                        type: string
+                      agentnum:
+                        type: integer
+                      address:
+                        type: string
+                      city:
+                        type: string
+                      state:
+                        type: string
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          required: true
+          description: Excell <Token>
+      security: []
+      description: Get the customer details from the token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                param:
+                  type: object
+                  properties:
+                    customerId:
+                      type: string
+  /getAllBblans:
+    post:
+      summary: Get all broadband plans offered by Excell Media.
+      operationId: post-getAllBblans
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resonse:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      result:
+                        type: object
+                        properties:
+                          plans:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                plan_id:
+                                  type: string
+                                plan_name:
+                                  type: string
+                                plan_type:
+                                  type: string
+                                plantype_name:
+                                  type: string
+                                plan_speed:
+                                  type: string
+                                data_limit:
+                                  type: string
+                                plan_postfup:
+                                  type: string
+                                plan_amount:
+                                  type: string
+                                location_id:
+                                  type: string
+                                location:
+                                  type: string
+                                contactnumber:
+                                  type: string
+                                address:
+                                  type: string
+                                emailid:
+                                  type: string
+      description: Get all broadband plans offered by Excell Media.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                param:
+                  type: object
+                  properties:
+                    locationID:
+                      type: string
 components:
   schemas: {}
-  securitySchemes:
-    api_key:
-      type: apiKey
-      in: header
-      name: api_key
+  securitySchemes: {}
   headers:
     ExpiresAfter:
       description: date in UTC when token expires
