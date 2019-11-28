@@ -297,7 +297,8 @@
           }
         },
         "tags": [
-          "Plans"
+          "Plans",
+          "Customer"
         ]
       }
     }
