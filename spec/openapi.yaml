@@ -2,58 +2,203 @@ openapi: 3.0.0
 info:
   title: Excell Customer App - API Specification
   version: 1.0.0
-  description: "This is API Specification of *Excell Media Pvt. Ltd. Customer App*."
+  description: 'API specification documentation of Customer App for *Excell Media Pvt. Ltd.* .'
   x-logo:
-    url: "https://media.licdn.com/dms/image/C510BAQFyYMfR1lF0AA/company-logo_400_400/0?e=1582761600&v=beta&t=xSpCdQvXO9ciXCj74hq6aBOUrUBiFAfM6onBiEUT7Hc"
+    url: 'https://media.licdn.com/dms/image/C510BAQFyYMfR1lF0AA/company-logo_400_400/0?e=1582761600&v=beta&t=xSpCdQvXO9ciXCj74hq6aBOUrUBiFAfM6onBiEUT7Hc'
   contact:
     email: lakshman@laurel.solutions
+    name: Lakshman Rao Pilaka
 servers:
-  - url: "http://app.excellbroadband.com/api/index.php"
+  - url: 'http://app.excellbroadband.com/api/index.php'
     description: Production
 paths:
-  /new:
-    get:
-      summary: Your GET endpoint
-      tags:
-        - Major
+  /generateToken:
+    post:
+      summary: Generate Token
+      operationId: generateToken
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                type: integer
-      operationId: get-new
-      description: Get new material for tis
+                type: object
+                properties:
+                  response:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                      result:
+                        type: object
+                        properties:
+                          token:
+                            type: string
+              examples: {}
+      description: Get auth token from cust id and mobile no.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                param:
+                  type: object
+                  required:
+                    - custId
+                    - mobileNum
+                  properties:
+                    custId:
+                      type: string
+                    mobileNum:
+                      type: string
+              required:
+                - name
+                - param
+            examples: {}
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+      tags:
+        - Authorization
+    parameters: []
+  /getCustomerDetails:
+    post:
+      summary: Customer Details
+      operationId: post-getCustomerDetails
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  result:
+                    type: object
+                    properties:
+                      customerId:
+                        type: string
+                      cutomerName:
+                        type: string
+                      daytime:
+                        type: string
+                      night:
+                        type: string
+                      mobile:
+                        type: string
+                      agentnum:
+                        type: integer
+                      address:
+                        type: string
+                      city:
+                        type: string
+                      state:
+                        type: string
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          required: true
+          description: 'Excell <Token>'
+      security: []
+      description: Get the customer details from the token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                param:
+                  type: object
+                  properties:
+                    customerId:
+                      type: string
+      tags:
+        - Customer
+  /getAllBblans:
+    post:
+      summary: Get All Broadband Plans
+      operationId: post-getAllBblans
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resonse:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      result:
+                        type: object
+                        properties:
+                          plans:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                plan_id:
+                                  type: string
+                                plan_name:
+                                  type: string
+                                plan_type:
+                                  type: string
+                                plantype_name:
+                                  type: string
+                                plan_speed:
+                                  type: string
+                                data_limit:
+                                  type: string
+                                plan_postfup:
+                                  type: string
+                                plan_amount:
+                                  type: string
+                                location_id:
+                                  type: string
+                                location:
+                                  type: string
+                                contactnumber:
+                                  type: string
+                                address:
+                                  type: string
+                                emailid:
+                                  type: string
+      description: Get all broadband plans offered by Excell Media.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                param:
+                  type: object
+                  properties:
+                    locationID:
+                      type: string
+      tags:
+        - Plans
+        - Customer
 components:
   schemas: {}
-  securitySchemes:
-    api_key:
-      type: apiKey
-      in: header
-      name: api_key
-    basic_auth:
-      type: http
-      scheme: basic
-    main_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: "http://example.com/api/oauth/dialog"
-          scopes:
-            "read:users": read users info
-            "write:users": modify or remove users
+  securitySchemes: {}
   headers:
     ExpiresAfter:
       description: date in UTC when token expires
       schema:
         type: string
         format: date-time
-tags:
-  - name: Echo
-    description: Example echo operations
-  - name: User
-    description: Operations about user
-externalDocs:
-  description: Find out how to create Github repo for your OpenAPI spec.
-  url: "https://github.com/Rebilly/generator-openapi-repo"
