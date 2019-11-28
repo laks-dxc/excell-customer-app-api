@@ -14,7 +14,7 @@ servers:
 paths:
   /generateToken:
     post:
-      summary: 'Get auth token of the customer '
+      summary: Generate Token
       operationId: generateToken
       responses:
         '200':
@@ -63,10 +63,12 @@ paths:
             schema:
               type: object
               properties: {}
+      tags:
+        - Authorization
     parameters: []
   /getCustomerDetails:
     post:
-      summary: Get basic contact details of the customer
+      summary: Customer Details
       operationId: post-getCustomerDetails
       responses:
         '200':
@@ -82,7 +84,7 @@ paths:
                     type: object
                     properties:
                       customerId:
-                        type: integer
+                        type: string
                       cutomerName:
                         type: string
                       daytime:
@@ -121,9 +123,11 @@ paths:
                   properties:
                     customerId:
                       type: string
+      tags:
+        - Customer
   /getAllBblans:
     post:
-      summary: Get all broadband plans offered by Excell Media
+      summary: Get All Broadband Plans
       operationId: post-getAllBblans
       responses:
         '200':
@@ -172,7 +176,7 @@ paths:
                                   type: string
                                 emailid:
                                   type: string
-      description: Get all broadband plans.
+      description: Get all broadband plans offered by Excell Media.
       requestBody:
         content:
           application/json:
@@ -186,6 +190,8 @@ paths:
                   properties:
                     locationID:
                       type: string
+      tags:
+        - Plans
 components:
   schemas: {}
   securitySchemes: {}

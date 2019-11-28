@@ -21,7 +21,7 @@
   "paths": {
     "/generateToken": {
       "post": {
-        "summary": "Get auth token of the customer ",
+        "summary": "Generate Token",
         "operationId": "generateToken",
         "responses": {
           "200": {
@@ -95,13 +95,16 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Authorization"
+        ]
       },
       "parameters": []
     },
     "/getCustomerDetails": {
       "post": {
-        "summary": "Get basic contact details of the customer",
+        "summary": "Customer Details",
         "operationId": "post-getCustomerDetails",
         "responses": {
           "200": {
@@ -118,7 +121,7 @@
                       "type": "object",
                       "properties": {
                         "customerId": {
-                          "type": "integer"
+                          "type": "string"
                         },
                         "cutomerName": {
                           "type": "string"
@@ -186,12 +189,15 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Customer"
+        ]
       }
     },
     "/getAllBblans": {
       "post": {
-        "summary": "Get all broadband plans offered by Excell Media",
+        "summary": "Get All Broadband Plans",
         "operationId": "post-getAllBblans",
         "responses": {
           "200": {
@@ -267,7 +273,7 @@
             }
           }
         },
-        "description": "Get all broadband plans.",
+        "description": "Get all broadband plans offered by Excell Media.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -289,7 +295,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Plans"
+        ]
       }
     }
   },
