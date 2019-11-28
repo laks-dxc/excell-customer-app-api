@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Excell Customer App - API Specification
   version: 1.0.0
-  description: This is API Specification of *Excell Media Pvt. Ltd. Customer App*.
+  description: This is API Specification of *Excell Media Pvt. Ltd. Customer App specification* .
   x-logo:
     url: 'https://media.licdn.com/dms/image/C510BAQFyYMfR1lF0AA/company-logo_400_400/0?e=1582761600&v=beta&t=xSpCdQvXO9ciXCj74hq6aBOUrUBiFAfM6onBiEUT7Hc'
   contact:
@@ -27,33 +27,9 @@ paths:
       description: Get new material for tis
 components:
   schemas: {}
-  securitySchemes:
-    api_key:
-      type: apiKey
-      in: header
-      name: api_key
-    basic_auth:
-      type: http
-      scheme: basic
-    main_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: 'http://example.com/api/oauth/dialog'
-          scopes:
-            'read:users': read users info
-            'write:users': modify or remove users
   headers:
     ExpiresAfter:
       description: date in UTC when token expires
       schema:
         type: string
         format: date-time
-tags:
-  - name: Echo
-    description: Example echo operations
-  - name: User
-    description: Operations about user
-externalDocs:
-  description: Find out how to create Github repo for your OpenAPI spec.
-  url: 'https://github.com/Rebilly/generator-openapi-repo'
