@@ -1,6 +1,0 @@
-description: User email address
-type: string
-format: test
-example: john.smith@example.com
-x-examples:
-  example-1: {}
