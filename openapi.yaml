@@ -2,31 +2,75 @@ openapi: 3.0.0
 info:
   title: Excell Customer App - API Specification
   version: 1.0.0
-  description: This is API Specification of *Excell Media Pvt. Ltd. Customer App specification* .
+  description: API specification documentation of Customer App for *Excell Media Pvt. Ltd.* .
   x-logo:
-    url: 'https://media.licdn.com/dms/image/C510BAQFyYMfR1lF0AA/company-logo_400_400/0?e=1582761600&v=beta&t=xSpCdQvXO9ciXCj74hq6aBOUrUBiFAfM6onBiEUT7Hc'
+    url: 'https://apis.guru/openapi-template/logo.png'
   contact:
     email: lakshman@laurel.solutions
+    name: Lakshman Rao Pilaka
 servers:
   - url: 'http://app.excellbroadband.com/api/index.php'
     description: Production
 paths:
-  /new:
-    get:
-      summary: Your GET endpoint
-      tags:
-        - Major
+  /generateToken:
+    post:
+      summary: ''
+      operationId: generateToken
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                type: integer
-      operationId: get-new
-      description: Get new material for tis
+                type: object
+                properties:
+                  response:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                      result:
+                        type: object
+                        properties:
+                          token:
+                            type: string
+              examples: {}
+      description: Get auth token from cust id and mobile no.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                param:
+                  type: object
+                  required:
+                    - custId
+                    - mobileNum
+                  properties:
+                    custId:
+                      type: string
+                    mobileNum:
+                      type: string
+              required:
+                - name
+                - param
+            examples: {}
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+    parameters: []
 components:
   schemas: {}
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: api_key
   headers:
     ExpiresAfter:
       description: date in UTC when token expires
