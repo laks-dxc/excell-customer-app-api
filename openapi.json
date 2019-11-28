@@ -191,7 +191,7 @@
     },
     "/getAllBblans": {
       "post": {
-        "summary": "Get all broadband plans offered by Excell Media.",
+        "summary": "Get all broadband plans offered by Excell Media",
         "operationId": "post-getAllBblans",
         "responses": {
           "200": {
@@ -267,7 +267,7 @@
             }
           }
         },
-        "description": "Get all broadband plans offered by Excell Media.",
+        "description": "Get all broadband plans.",
         "requestBody": {
           "content": {
             "application/json": {
