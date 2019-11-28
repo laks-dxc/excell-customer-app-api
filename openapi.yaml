@@ -12,7 +12,7 @@ info:
   x-logo:
     url: 'https://apis.guru/openapi-template/logo.png'
   description: |
-    This is an **my example of laks** API to demonstrate features of OpenAPI specification
+    This is an **example** API to demonstrate features of OpenAPI specification
     # Introduction
     This specification is intended to to be a good starting point for describing your API in 
     [OpenAPI/Swagger format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md).
@@ -21,7 +21,7 @@ info:
     [vendor extensions](https://github.com/Rebilly/ReDoc/blob/master/docs/redoc-vendor-extensions.md).
 
     # OpenAPI Specification
-    The goals of The OpenAPI Specification is to define a standard, language-agnostic interface to REST APIs which
+    The goal of The OpenAPI Specification is to define a standard, language-agnostic interface to REST APIs which
     allows both humans and computers to discover and understand the capabilities of the service without access to source
     code, documentation, or through network traffic inspection. When properly defined via OpenAPI, a consumer can 
     understand and interact with the remote service with a minimal amount of implementation logic. Similar to what
@@ -38,102 +38,6 @@ servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
-  /echo:
-    post:
-      tags:
-        - Echo
-      summary: Echo test
-      description: Receive the exact message you've sent
-      operationId: echo
-      security:
-        - api_key: []
-        - basic_auth: []
-      responses:
-        '200':
-          description: OK
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              $ref: '#/components/headers/ExpiresAfter'
-          content:
-            application/json:
-              schema:
-                type: string
-              examples:
-                response:
-                  value: Hello world!
-            application/xml:
-              schema:
-                type: string
-            text/csv:
-              schema:
-                type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-              example: Hello world!
-          application/xml:
-            schema:
-              type: string
-              example: Hello world!
-        description: Echo payload
-        required: true
-      x-code-samples:
-        - lang: 'C#'
-          source: |
-            API.v1.Echo echo = new API.v1.Echo();
-            echo.message = "Hello World!");
-            EchoResponse response = echo.post();
-            if (response.statusCode == HttpStatusCode.Created)
-            {
-              // Success
-            }
-            else
-            {
-              // Something wrong -- check response for errors
-              Console.WriteLine(response.getRawResponse());
-            }
-        - lang: PHP
-          source: |
-            $form = new \API\Entities\Echo();
-            $form->setMessage("Hello World!");
-            try {
-                $pet = $client->echo()->post($form);
-            } catch (UnprocessableEntityException $e) {
-                var_dump($e->getErrors());
-            }
-  /my/path:
-    post:
-      summary: summary of my post
-      operationId: post-my-path
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-      description: Description for my path
-      security:
-        - basic_auth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                mybodysring:
-                  type: string
-        description: ''
   '/users/{username}':
     parameters:
       - name: pretty_print
@@ -212,6 +116,52 @@ paths:
               $ref: '#/components/schemas/User'
         description: Updated user object
         required: true
+  /echo:
+    post:
+      tags:
+        - Echo
+      summary: Echo test
+      description: Receive the exact message you've sent
+      operationId: echo
+      security:
+        - api_key: []
+        - basic_auth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              $ref: '#/components/headers/ExpiresAfter'
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                response:
+                  value: Hello world!
+            application/xml:
+              schema:
+                type: string
+            text/csv:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              example: Hello world!
+          application/xml:
+            schema:
+              type: string
+              example: Hello world!
+        description: Echo payload
+        required: true
 components:
   schemas:
     Email:
@@ -219,8 +169,6 @@ components:
       type: string
       format: test
       example: john.smith@example.com
-      x-examples:
-        example-1: {}
     User:
       type: object
       properties:
@@ -248,15 +196,6 @@ components:
         type: string
         format: date-time
   securitySchemes:
-    API Key - 1:
-      type: openIdConnect
-    api_key:
-      type: apiKey
-      in: header
-      name: api_key
-    basic_auth:
-      type: http
-      scheme: basic
     main_auth:
       type: oauth2
       flows:
@@ -265,3 +204,10 @@ components:
           scopes:
             'read:users': read users info
             'write:users': modify or remove users
+    api_key:
+      type: apiKey
+      in: header
+      name: api_key
+    basic_auth:
+      type: http
+      scheme: basic
