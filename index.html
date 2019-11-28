@@ -1,32 +1,60 @@
+
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <title>Customer App - API Reference | Excell Media Pvt. Ltd.</title>
-  <!-- needed for adaptive design -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="favicon.png">
-
-
+  <meta charset="UTF-8">
+  <title>Swagger UI</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.2.2/swagger-ui.css" >
   <style>
+    html
+    {
+      box-sizing: border-box;
+      overflow: -moz-scrollbars-vertical;
+      overflow-y: scroll;
+    }
+    *,
+    *:before,
+    *:after
+    {
+      box-sizing: inherit;
+    }
+
     body {
-      margin: 0;
-      padding: 0;
+      margin:0;
+      background: #fafafa;
     }
   </style>
-  
 </head>
-
 <body>
-  <div id="redoc_container"></div>
-    <script src="https://cdn.jsdelivr.net/npm/redoc/bundles/redoc.standalone.js"></script>
-    <script>
-      Redoc.init(
-        './openapi.json',
-        {"theme":{"colors":{"primary":{"main":"#c81e52"}}}},
-        document.getElementById("redoc_container")
-      );
-    </script>
+
+<div id="swagger-ui"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.2.2/swagger-ui-bundle.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.2.2/swagger-ui-standalone-preset.js"> </script>
+<script>
+window.onload = function() {
+
+  var spec = {"openapi": "3.0.0", "info": {"title": "Excell Customer App - API Specification", "version": "1.0.0", "description": "API specification documentation of Customer App for *Excell Media Pvt. Ltd.* .", "x-logo": {"url": "https://media.licdn.com/dms/image/C510BAQFyYMfR1lF0AA/company-logo_400_400/0?e=1582761600&v=beta&t=xSpCdQvXO9ciXCj74hq6aBOUrUBiFAfM6onBiEUT7Hc"}, "contact": {"email": "lakshman@laurel.solutions", "name": "Lakshman Rao Pilaka"}}, "servers": [{"url": "http://app.excellbroadband.com/api/index.php", "description": "Production"}], "paths": {"/generateToken": {"post": {"summary": "Generate Token", "operationId": "generateToken", "responses": {"200": {"description": "OK", "content": {"application/json": {"schema": {"type": "object", "properties": {"response": {"type": "object", "properties": {"status": {"type": "string"}, "result": {"type": "object", "properties": {"token": {"type": "string"}}}}}}}, "examples": {}}}}}, "description": "Get auth token from cust id and mobile no.", "parameters": [], "requestBody": {"content": {"application/json": {"schema": {"type": "object", "properties": {"name": {"type": "string"}, "param": {"type": "object", "required": ["custId", "mobileNum"], "properties": {"custId": {"type": "string"}, "mobileNum": {"type": "string"}}}}, "required": ["name", "param"]}, "examples": {}}, "application/xml": {"schema": {"type": "object", "properties": {}}}}}, "tags": ["Authorization"]}, "parameters": []}, "/getCustomerDetails": {"post": {"summary": "Customer Details", "operationId": "post-getCustomerDetails", "responses": {"200": {"description": "OK", "content": {"application/json": {"schema": {"type": "object", "properties": {"status": {"type": "integer"}, "result": {"type": "object", "properties": {"customerId": {"type": "string"}, "cutomerName": {"type": "string"}, "daytime": {"type": "string"}, "night": {"type": "string"}, "mobile": {"type": "string"}, "agentnum": {"type": "integer"}, "address": {"type": "string"}, "city": {"type": "string"}, "state": {"type": "string"}}}}}}}}}, "parameters": [{"schema": {"type": "string"}, "in": "header", "name": "Authorization", "required": true, "description": "Excell <Token>"}], "security": [], "description": "Get the customer details from the token", "requestBody": {"content": {"application/json": {"schema": {"type": "object", "properties": {"name": {"type": "string"}, "param": {"type": "object", "properties": {"customerId": {"type": "string"}}}}}}}}, "tags": ["Customer"]}}, "/getAllBblans": {"post": {"summary": "Get All Broadband Plans", "operationId": "post-getAllBblans", "responses": {"200": {"description": "OK", "content": {"application/json": {"schema": {"type": "object", "properties": {"resonse": {"type": "object", "properties": {"status": {"type": "integer"}, "result": {"type": "object", "properties": {"plans": {"type": "array", "items": {"type": "object", "properties": {"plan_id": {"type": "string"}, "plan_name": {"type": "string"}, "plan_type": {"type": "string"}, "plantype_name": {"type": "string"}, "plan_speed": {"type": "string"}, "data_limit": {"type": "string"}, "plan_postfup": {"type": "string"}, "plan_amount": {"type": "string"}, "location_id": {"type": "string"}, "location": {"type": "string"}, "contactnumber": {"type": "string"}, "address": {"type": "string"}, "emailid": {"type": "string"}}}}}}}}}}}}}}, "description": "Get all broadband plans offered by Excell Media.", "requestBody": {"content": {"application/json": {"schema": {"type": "object", "properties": {"name": {"type": "string"}, "param": {"type": "object", "properties": {"locationID": {"type": "string"}}}}}}}}, "tags": ["Plans", "Customer"]}}}, "components": {"schemas": {}, "securitySchemes": {}, "headers": {"ExpiresAfter": {"description": "date in UTC when token expires", "schema": {"type": "string", "format": "date-time"}}}}};
+
+  // Build a system
+  const ui = SwaggerUIBundle({
+    spec: spec,
+    dom_id: '#swagger-ui',
+    deepLinking: true,
+    presets: [
+      SwaggerUIBundle.presets.apis,
+      SwaggerUIStandalonePreset
+    ],
+    plugins: [
+      SwaggerUIBundle.plugins.DownloadUrl
+    ],
+    layout: "StandaloneLayout"
+  })
+
+  window.ui = ui
+}
+</script>
 </body>
 
 </html>
